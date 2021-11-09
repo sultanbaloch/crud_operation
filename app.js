@@ -1,12 +1,12 @@
 
-function post_create()
+function post()
 {
     let student_name = document.getElementById('student_name').value;
     let father_name = document.getElementById('father_name').value;
     let age = document.getElementById('age').value;
     let roll_no = document.getElementById('roll_no').value;
 
-    axios.post('https://pacific-coast-71393.herokuapp.com/user', {
+    axios.post('https://heroku-crud-operation.herokuapp.com/user', {
         student_name: student_name,father_name:father_name
         ,age:age,roll_no:roll_no
           })
@@ -17,15 +17,15 @@ function post_create()
         document.getElementById('father_name').value='';
         document.getElementById('age').value='';
         document.getElementById('roll_no').value='';    
-        get_all();
+        put();
       })
       .catch(function (error) {
         console.log(error);
       });
 }
 
-function get_all(){
-    axios.get('https://pacific-coast-71393.herokuapp.com/users')
+function get(){
+    axios.get('https://heroku-crud-operation.herokuapp.com/users')
   .then(function (response) {
       $html='';
     console.log(response);
@@ -71,33 +71,33 @@ function get_record($obj){
     document.getElementById('student_id').value=id;        
 }
 
-function update_student(){
+function put(){
   let student_name = document.getElementById('student_name').value;
   let father_name = document.getElementById('father_name').value;
   let age = document.getElementById('age').value;
   let roll_no = document.getElementById('roll_no').value;
 
   let id = document.getElementById('student_id').value;
-  axios.put('https://pacific-coast-71393.herokuapp.com/user/'+id, {
+  axios.put('https://heroku-crud-operation.herokuapp.com/user/'+id, {
     student_name: student_name,father_name:father_name
     ,age:age,roll_no:roll_no
 })
   .then(response => {
     alert("User Updated");
-    get_all();
+    get();
 
   })
   .catch(error => {
     console.log(err);
   });
 }
-function delete_student(){
+function delete_user(){
     let id = document.getElementById('student_id').value;
-    axios.delete('https://pacific-coast-71393.herokuapp.com/user/'+id)
+    axios.delete('https://heroku-crud-operation.herokuapp.com/user/'+id)
   .then(function (response) {
     console.log(response);
     alert(response.data)
-    get_all();
+    get();
 })
   .catch(function (error) {
     // handle error
